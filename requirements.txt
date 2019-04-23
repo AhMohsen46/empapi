@@ -1,0 +1,5 @@
+django==1.11.8
+djangorestframework==3.7.3
+djangorestframework-jwt==1.11.0
+apscheduler
+django-apscheduler
