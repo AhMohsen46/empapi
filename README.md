@@ -49,11 +49,11 @@ SCHEDULER_AUTOSTART = True
 ### Running the API
 
 
-+ To get the payments report for the rest of the year: `api/api_main/getdata/`
-+ To get the payments report for the rest of the year: `api/api_main/editbonus/employeeid/newbonus/`
-+ To edit a certain employee bonus rate: `api/api_main/editbonus/employeeid/newbonus/`
-+ To create new employee data: `api/api_main/newemp/employeeid/salary/bonus/`
-+ To delete employee data: `api/api_main/delete/employeeid/`
++ To get the payments report for the rest of the year: GET `api/api_main/getdata/` --body: empty
++ To get Employee details: POST `api/api_main/empdetails/` --body: {"emp_id": desired employee id}
++ To create new employee data: POST `api/api_main/newemp/` --body: {"emp_id": new id, "salary": new salary, "bonus": new bonus rate}
++ To edit a certain employee bonus rate: PUT `api/api_main/editbonus/` --body: {"emp_id": desired employee id, "new_bonus": new bonus}
++ To delete employee data: DELETE `api/api_main/delete/` --body: {"emp_id": desired employee id}
 
 
 
