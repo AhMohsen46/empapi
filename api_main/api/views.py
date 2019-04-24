@@ -80,14 +80,17 @@ def empdetails(request):
 
 @csrf_exempt 
 def update_bonus(request):
-    if request.method == "POST":
+    if request.method == "PUT":
         request_data= json.loads(request.body)
         emp_id= request_data.get("emp_id")
         bonus= request_data.get("new_bonus")
         if Employee.objects.filter(emp_id = emp_id):
             old_bonus = Employee.objects.filter(emp_id = emp_id).values('bonus').get()['bonus']
-            Employee.objects.filter(emp_id = emp_id).update(bonus = bonus)
-            return HttpResponse("employee %s bonus was changed from %s to %s"%(emp_id,old_bonus,float(bonus)))
+            if old_bonus == bonus:
+                return HttpResponse("No change")
+            else:
+                Employee.objects.filter(emp_id = emp_id).update(bonus = bonus)
+                return HttpResponse("employee %s bonus was changed from %s to %s"%(emp_id,old_bonus,float(bonus)))
         else:
             return HttpResponse("No Employee with id %s"%(emp_id))
 
@@ -116,7 +119,7 @@ def new_employee(request):
 @csrf_exempt 
 def delete_employee(request):
 
-    if request.method == "POST":
+    if request.method == "DELETE":
         request_data= json.loads(request.body)
         print(request_data)
         emp_id = request_data.get("emp_id")
